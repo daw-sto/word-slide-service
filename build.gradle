@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2+"
+    }
+}
+
+apply plugin: "groovy"
+apply plugin: "org.springframework.boot"
+apply plugin: 'io.spring.dependency-management'
+
+group 'pl.dast'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // logging
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.8.0-beta4'
+
+    // Spring
+    compile("org.springframework.boot:spring-boot-starter")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile group: 'org.springframework', name: 'spring-web', version: '5.1.6.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-jetty'
+    runtime 'org.springframework.boot:spring-boot-devtools'
+
+    // Spock and tests
+    compile "org.codehaus.groovy:groovy-all:2.4.15"
+    testCompile 'org.springframework.boot:spring-boot-test'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.spockframework:spock-core:1.2-groovy-2.4'
+    testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4'
+    testRuntime 'cglib:cglib-nodep:3.2.4'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    
+    // lombok
+    compileOnly 'org.projectlombok:lombok:1.18.4'
+    annotationProcessor 'org.projectlombok:lombok:1.18.4'
+    
+    // utils
+    compile 'org.apache.commons:commons-lang3:3.9'
+    compile 'com.google.guava:guava:27.1-jre'
+}
+
+
