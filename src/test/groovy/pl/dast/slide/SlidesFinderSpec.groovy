@@ -81,9 +81,7 @@ class SlidesFinderSpec extends Specification {
                 randomSlideList.add(randomStr)
             }
         }
-
         Collections.shuffle(randomSlideList)
-
         String randomSentence = "";
         randomSlideList.each {
             randomSentence += it + " " + generateSlide("X ") + " "

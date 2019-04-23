@@ -36,14 +36,14 @@ public class AsyncStoreLoader {
     public Map<String, Integer> getValues(Set<String> keySet) throws AsyncStoreLoaderException {
         ExecutorService executorService = Executors.newFixedThreadPool(threadPoolSize);
 
-        List<Callable<Pair<String, Integer>>> collect = keySet
+        List<Callable<Pair<String, Integer>>> callableList = keySet
                 .stream()
                 .map(key -> new StoreLoadCallable(key))
                 .collect(Collectors.toList());
 
         List<Future<Pair<String, Integer>>> futuresList;
         try {
-            futuresList = executorService.invokeAll(collect, responseTimeOutInMls, TimeUnit.MILLISECONDS);
+            futuresList = executorService.invokeAll(callableList, responseTimeOutInMls, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
             log.error("Error while loading values.", e);
             throw new AsyncStoreLoaderException("Exception during value retrieval.");
